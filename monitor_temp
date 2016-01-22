@@ -20,8 +20,8 @@ case "$1" in
      python -u /var/temperature/monitor.py > /dev/null&
     ;;
   stop)
-      echo "Stopping monitor.py"
-      killall monitor.py
+      echo "Stopping monitor"
+      pkill -f "python -u /var/temperature/monitor.py"
     ;;
   *)
     echo "Usage: /var/temperature/monitor.py"
