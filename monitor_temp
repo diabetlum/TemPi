@@ -16,15 +16,19 @@
 # Carry out specific functions when asked to by the system
 case "$1" in
   start)
-#    python -u /var/temperature/monitor.py >>/var/temperature/temps.log&
+     echo "Started temperature logging"
      python -u /var/temperature/monitor.py > /dev/null&
     ;;
   stop)
-      echo "Stopping monitor"
+      echo "Stopped temperature logging"
       pkill -f "python -u /var/temperature/monitor.py"
     ;;
+  log)
+      echo "Start log of temperatures to database and file: /var/temperature/temps.log"
+      python -u /var/temperature/monitor.py >>/var/temperature/temps.log&
+    ;;
   *)
-    echo "Usage: /var/temperature/monitor.py"
+    echo "Usage: service monitor_temp [start stop log]"
     exit 1
     ;;
 esac
